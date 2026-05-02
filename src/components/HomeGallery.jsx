@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { media } from '@/assets/media.js';
+import { HOME_GALLERY_MEDIA_KEYS, media } from '@/assets/media.js';
 import { ImageLightbox } from './ImageLightbox.jsx';
 
-const MEDIA_KEYS = ['gridLiving', 'gridTray', 'gridCurtains', 'gridPatio'];
-/** Intrinsic pixels of `styled-coffee-tray-1.jpg` (see MEDIA_FILES.gridLiving). */
+const MEDIA_KEYS = HOME_GALLERY_MEDIA_KEYS;
+/** Intrinsic pixels of gallery frames (`gallery-01.jpg` etc. @ 900×1600). */
 const REFERENCE_FRAME_W = 900;
 const REFERENCE_FRAME_H = 1600;
 /** Minimum repeated sequences (see stripCopies math — 2 is often too short vs viewport) */
@@ -39,13 +39,31 @@ export function HomeGallery({ lang }) {
         close: 'Close',
         enlarge: 'Enlarge',
         region: 'Project photography',
-        slides: ['Living space', 'Stair and architecture', 'Styling detail', 'Interior moment'],
+        slides: [
+          'Glass entry',
+          'Stair detail',
+          'Outdoor living',
+          'Interior doorway',
+          'Art wall',
+          'Coffee corner',
+          'Textiles and wood',
+          'Relaxed styling',
+        ],
       }
     : {
         close: 'إغلاق',
         enlarge: 'تكبير',
         region: 'صور المشاريع',
-        slides: ['صالة المعيشة', 'درج وتفاصيل معمارية', 'تفاصيل تنسيق', 'لقطة داخلية'],
+        slides: [
+          'مدخل زجاجي',
+          'تفاصيل الدرج',
+          'معيشة خارجية',
+          'باب داخلي',
+          'جدار فني',
+          'ركن القهوة',
+          'منسوجات وخشب',
+          'تنسيق هادئ',
+        ],
       };
 
   const slides = MEDIA_KEYS.map((key, i) => ({

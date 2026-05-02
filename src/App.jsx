@@ -11,10 +11,24 @@ const SITE_HEADER = {
   scrollTriggerPx: 40,
 };
 
+function readStoredTheme() {
+  try {
+    const v = localStorage.getItem('ft-theme');
+    if (v === 'dark' || v === 'light') return v;
+  } catch {
+    /* ignore */
+  }
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
 export default function App() {
   const [screen, setScreen] = useState('home');
   const [lang, setLang] = useState('en');
   const [tier, setTier] = useState(1);
+  const [theme, setTheme] = useState(readStoredTheme);
 
   const nav = (s) => { setScreen(s); window.scrollTo({ top: 0, behavior: 'instant' }); };
   const selectTier = (n) => { setTier(n); nav('book'); };
@@ -25,9 +39,26 @@ export default function App() {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }, [lang]);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('ft-theme', theme);
+    } catch {
+      /* ignore */
+    }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute('content', theme === 'dark' ? '#141210' : '#ECE4D2');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+
   return (
     <div lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Header
+        theme={theme}
+        onThemeToggle={toggleTheme}
         current={screen === 'confirm' ? 'book' : screen}
         onNav={nav}
         lang={lang}

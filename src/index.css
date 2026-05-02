@@ -298,7 +298,19 @@ img { max-width: 100%; display: block; }
   outline: 2px solid var(--ft-forest);
   outline-offset: 4px;
 }
-.brand img { width: 28px; height: auto; flex-shrink: 0; }
+.brand-mark {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.brand-mark img {
+  width: 34px;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+  transform-origin: center center;
+  animation: brand-mark-attention 0.95s cubic-bezier(0.34, 1.28, 0.52, 1) 2s both;
+}
 .brand-name {
   font-family: var(--font-display);
   font-weight: 500;
@@ -307,6 +319,8 @@ img { max-width: 100%; display: block; }
   color: var(--ft-ink);
   line-height: 1;
   transition: color 0.3s ease;
+  transform-origin: left center;
+  animation: brand-name-attention 0.82s cubic-bezier(0.34, 1.22, 0.52, 1) 2.08s both;
 }
 .brand-tag {
   font-family: var(--font-body);
@@ -318,6 +332,10 @@ img { max-width: 100%; display: block; }
   margin-top: 5px;
   opacity: 0.92;
   transition: opacity 0.3s ease;
+  animation: brand-tag-attention 0.88s cubic-bezier(0.34, 1.18, 0.52, 1) 2.18s both;
+}
+[dir='rtl'] .brand-name {
+  transform-origin: right center;
 }
 .brand:hover .brand-tag { opacity: 1; }
 
@@ -449,6 +467,40 @@ img { max-width: 100%; display: block; }
   outline-offset: 3px;
 }
 
+.nav-trailing {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2.2vw, 20px);
+  flex-shrink: 0;
+}
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid color-mix(in oklab, var(--ft-ink) 14%, transparent);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ft-ink-3);
+  cursor: pointer;
+  transition:
+    color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-toggle-btn:hover {
+  color: var(--ft-ink);
+  border-color: color-mix(in oklab, var(--ft-ink) 28%, transparent);
+  background: color-mix(in oklab, var(--ft-ink) 6%, transparent);
+}
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--ft-forest);
+  outline-offset: 3px;
+}
+
 .site-header.over-hero.hero-light .brand:focus-visible,
 .site-header.over-hero.hero-light .nav-link:focus-visible,
 .site-header.over-hero.hero-light .lang-toggle button:focus-visible {
@@ -472,6 +524,56 @@ img { max-width: 100%; display: block; }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Brand — one attention beat ~2s after load (staggered lockup); prefers-reduced-motion disables */
+@keyframes brand-mark-attention {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  20% {
+    transform: translate3d(0, 5px, 0) scale(0.9);
+  }
+  52% {
+    transform: translate3d(0, -4px, 0) scale(1.08);
+  }
+  78% {
+    transform: translate3d(0, 1px, 0) scale(0.99);
+  }
+}
+@keyframes brand-name-attention {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  32% {
+    opacity: 0.78;
+    transform: translate3d(0, 6px, 0);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -3px, 0);
+  }
+}
+@keyframes brand-tag-attention {
+  0%,
+  100% {
+    opacity: 0.92;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: 0.28em;
+  }
+  38% {
+    opacity: 0.55;
+    transform: translate3d(0, 5px, 0);
+    letter-spacing: 0.2em;
+  }
+  68% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 0);
+    letter-spacing: 0.34em;
   }
 }
 
@@ -654,6 +756,20 @@ img { max-width: 100%; display: block; }
   .site-header {
     animation: none;
   }
+  .brand-mark img,
+  .brand-name,
+  .brand-tag {
+    animation: none !important;
+  }
+  .brand-name {
+    opacity: 1;
+    transform: none;
+  }
+  .brand-tag {
+    opacity: 0.92;
+    letter-spacing: 0.28em;
+    transform: none;
+  }
   .site-header + main > .hero:first-child .hero-img {
     animation: none;
     opacity: 1;
@@ -801,7 +917,7 @@ main > .section.home-section-tiers .home-tiers-grid {
   height: 100%;
   min-height: 0;
   background: var(--ft-paper);
-  border-radius: 4px;
+  border-radius: var(--r-lg);
   overflow: hidden;
   border: 1px solid color-mix(in oklab, color-mix(in oklab, var(--ft-ink) 11%, var(--ft-cream)) 58%, transparent);
   box-shadow:
@@ -818,11 +934,7 @@ main > .section.home-section-tiers .home-tiers-grid {
 }
 .tier-ribbon {
   flex-shrink: 0;
-  background: linear-gradient(
-    165deg,
-    color-mix(in oklab, var(--ft-forest) 88%, var(--ft-forest-muted)),
-    color-mix(in oklab, var(--ft-forest) 78%, var(--ft-forest-deep)) 100%
-  );
+  background: var(--ft-forest);
   color: var(--ft-paper);
   padding: 20px 24px;
   display: flex; align-items: center; justify-content: space-between;
@@ -900,6 +1012,18 @@ main > .section.home-section-tiers .home-tiers-grid {
 .check-row svg { flex: 0 0 18px; width: 18px; height: 18px; color: var(--ft-walnut); margin-top: 3px; }
 .check-row strong { color: var(--ft-ink); font-weight: 600; }
 
+/* Inline elevated panels (Services scope list, Book form shell) */
+.surface-card {
+  background: var(--ft-paper);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-1);
+  border-radius: var(--r-lg);
+}
+.surface-card--raised {
+  box-shadow: var(--shadow-2);
+  border-radius: 12px;
+}
+
 /* Form */
 .form { display: flex; flex-direction: column; gap: 18px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -931,7 +1055,7 @@ main > .section.home-section-tiers .home-tiers-grid {
   cursor: pointer;
   border: 1px solid var(--line);
   background: var(--ft-paper);
-  border-radius: 2px;
+  border-radius: var(--r-md);
   padding: 16px 18px;
   display: flex; flex-direction: column; gap: 4px;
   transition:
@@ -949,7 +1073,7 @@ main > .section.home-section-tiers .home-tiers-grid {
 /* Confirmation */
 .confirm-card {
   background: var(--ft-paper);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 56px;
   box-shadow: var(--shadow-2);
   text-align: center;
@@ -968,7 +1092,7 @@ main > .section.home-section-tiers .home-tiers-grid {
   text-align: left;
   background: var(--ft-cream-soft);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--r-lg);
   padding: 22px 24px;
   max-width: 480px;
   display: flex; flex-direction: column; gap: 12px;
@@ -1263,7 +1387,7 @@ main > .section.home-section-tiers .home-tiers-grid {
   outline-offset: 4px;
 }
 .home-gallery-row {
-  --gallery-max-h: min(54vh, 600px);
+  --gallery-max-h: min(48vh, 520px);
   --gallery-frame: 4px solid #fff;
   --gallery-frame-radius: var(--r-sm);
   --gallery-frame-edge: 0 0 0 1px color-mix(in oklab, var(--ft-ink) 13%, transparent);
@@ -1284,7 +1408,7 @@ main > .section.home-section-tiers .home-tiers-grid {
     0 0 78px color-mix(in oklab, var(--ft-cream-soft) 45%, transparent),
     0 0 130px color-mix(in oklab, var(--ft-paper) 34%, transparent),
     0 0 195px color-mix(in oklab, var(--ft-cream-soft) 26%, transparent);
-  /* styled-coffee-tray-1.jpg @ 900×1600 — treadmill cells follow this aspect in JS */
+  /* gallery-*.jpg @ 900×1600 — treadmill cells follow this aspect in JS */
   --gallery-ref-frame-w: 900;
   --gallery-ref-frame-h: 1600;
   display: grid;
@@ -1432,7 +1556,7 @@ main > .section.home-section-tiers .home-tiers-grid {
 
 @media (max-width: 768px) {
   .home-gallery-row {
-    --gallery-max-h: min(49vh, 412px);
+    --gallery-max-h: min(44vh, 364px);
     --gallery-main-backlight:
       0 0 28px color-mix(in oklab, var(--ft-paper) 52%, transparent),
       0 0 56px color-mix(in oklab, var(--ft-cream-soft) 40%, transparent),
@@ -1659,3 +1783,247 @@ main > .section.home-section-tiers .home-tiers-grid {
 }
 
 [dir="rtl"] .check-row { flex-direction: row-reverse; text-align: right; }
+
+/* ─── Dark theme (`data-theme` on `<html>` from App) ─────────────────────── */
+[data-theme='dark'] .surface-card {
+  border-color: color-mix(in oklab, #fff 13%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.055),
+    0 10px 32px rgba(0, 0, 0, 0.38);
+}
+[data-theme='dark'] .surface-card--raised {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.055),
+    0 14px 40px rgba(0, 0, 0, 0.42);
+}
+
+[data-theme='dark'] .tier {
+  border-color: color-mix(in oklab, #fff 13%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.055),
+    0 12px 36px rgba(0, 0, 0, 0.42);
+}
+[data-theme='dark'] .tier:hover {
+  border-color: color-mix(in oklab, #fff 19%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.075),
+    0 16px 44px rgba(0, 0, 0, 0.48);
+}
+
+/* Ribbon still expects near-white copy; `--ft-paper` is dark in this theme */
+[data-theme='dark'] .tier-ribbon,
+[data-theme='dark'] .tier-ribbon-title {
+  color: #f4efe8;
+}
+[data-theme='dark'] .tier-meta {
+  opacity: 0.95;
+  color: color-mix(in oklab, #f4efe8 90%, transparent);
+}
+[data-theme='dark'] .tier-num {
+  background: transparent;
+  color: #f4efe8;
+  border-color: color-mix(in oklab, #f4efe8 38%, transparent);
+}
+
+[data-theme='dark'] .tier-ribbon {
+  background: var(--gradient-forest-velvet);
+  box-shadow:
+    inset 0 10px 24px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .confirm-card {
+  border: 1px solid color-mix(in oklab, #fff 12%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .confirm-icon {
+  background: transparent;
+  border: 1px solid color-mix(in oklab, var(--ft-forest-muted) 42%, transparent);
+  color: var(--ft-forest-muted);
+}
+
+/* Checklist marks + tier nums: no gray/green “pill” fills — quiet ink strokes */
+[data-theme='dark'] .check-row svg {
+  color: var(--ft-ink-3);
+}
+
+[data-theme='dark'] .btn-primary {
+  background: var(--gradient-forest-velvet);
+  color: #fbf8f0;
+  border-color: color-mix(in oklab, var(--ft-forest-deep) 28%, var(--ft-forest));
+  box-shadow:
+    inset 0 8px 18px rgba(0, 0, 0, 0.11),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.06);
+}
+[data-theme='dark'] .btn-primary:hover {
+  background: var(--gradient-forest-velvet-hover);
+  border-color: color-mix(in oklab, var(--ft-forest-deep) 40%, var(--ft-forest));
+  box-shadow:
+    inset 0 7px 16px rgba(0, 0, 0, 0.13),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.07);
+}
+[data-theme='dark'] .btn-primary:active {
+  opacity: 0.94;
+  box-shadow:
+    inset 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+[data-theme='dark'] .hero {
+  --ft-paper: #fbf8f0;
+  --ft-ink: #1f1b17;
+  --ft-ink-2: #d8d0c4;
+  --ft-ink-3: #a69f96;
+  background: #1f1b17;
+}
+
+[data-theme='dark'] .site-footer {
+  background: #0e0c0a;
+  color: color-mix(in oklab, #e8e2d9 74%, transparent);
+}
+[data-theme='dark'] .site-footer h4 {
+  color: #f4efe8;
+}
+[data-theme='dark'] .footer-block p,
+[data-theme='dark'] .footer-block a {
+  color: color-mix(in oklab, #e8e2d9 76%, transparent);
+}
+[data-theme='dark'] .footer-block a:hover {
+  color: #f4efe8;
+}
+[data-theme='dark'] .footer-bottom {
+  border-top-color: color-mix(in oklab, #fff 12%, transparent);
+  color: color-mix(in oklab, #e8e2d9 48%, transparent);
+}
+
+/*
+ * Dark gallery frames: opaque stroke reads clean; warm paper-beige is gentler than pure white.
+ */
+[data-theme='dark'] .home-gallery-row {
+  --gallery-frame: 2px solid #e9e4da;
+  --gallery-frame-edge: 0 0 0 1px #e9e4da;
+  --gallery-frame-lift-main: 0 0 18px rgba(233, 228, 218, 0.18);
+}
+
+[data-theme='dark'] .field-input:focus,
+[data-theme='dark'] .field-textarea:focus,
+[data-theme='dark'] .field-select:focus {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ft-forest) 38%, transparent);
+}
+
+[data-theme='dark'] .image-lightbox-backdrop {
+  background: color-mix(in oklab, #000 86%, transparent);
+}
+[data-theme='dark'] .image-lightbox-close {
+  border-color: color-mix(in oklab, #fff 34%, transparent);
+  background: color-mix(in oklab, #fff 12%, transparent);
+  color: #f4efe8;
+}
+[data-theme='dark'] .image-lightbox-close:hover {
+  background: color-mix(in oklab, #fff 18%, transparent);
+  border-color: color-mix(in oklab, #fff 48%, transparent);
+}
+
+/* Dark UI + hero photo: light nav on hero for contrast */
+[data-theme='dark'] .site-header.over-hero.hero-dark .brand-name,
+[data-theme='dark'] .site-header.over-hero.hero-dark .brand-tag,
+[data-theme='dark'] .site-header.over-hero.hero-dark .nav-link,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .nav-link {
+  color: #fbf8f0;
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .brand-tag,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .brand-tag {
+  color: color-mix(in oklab, #fbf8f0 76%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .brand img,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .brand img {
+  filter: brightness(0) invert(1);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .nav-link:hover,
+[data-theme='dark'] .site-header.over-hero.hero-dark .nav-link.active,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .nav-link:hover,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .nav-link.active {
+  color: #fbf8f0;
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .lang-toggle,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .lang-toggle {
+  --lang-rule: color-mix(in oklab, #fbf8f0 28%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .lang-toggle button,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .lang-toggle button {
+  color: color-mix(in oklab, #fbf8f0 54%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .lang-toggle button.active,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .lang-toggle button.active {
+  color: #fbf8f0;
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .lang-toggle button:hover:not(.active),
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .lang-toggle button:hover:not(.active) {
+  color: color-mix(in oklab, #fbf8f0 74%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .theme-toggle-btn,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .theme-toggle-btn {
+  border-color: color-mix(in oklab, #fbf8f0 26%, transparent);
+  color: color-mix(in oklab, #fbf8f0 62%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .theme-toggle-btn:hover,
+[data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .theme-toggle-btn:hover {
+  color: #fbf8f0;
+  border-color: color-mix(in oklab, #fbf8f0 42%, transparent);
+  background: color-mix(in oklab, #fbf8f0 10%, transparent);
+}
+[data-theme='dark'] .site-header.over-hero.hero-dark .nav-link:focus-visible,
+[data-theme='dark'] .site-header.over-hero.hero-dark .brand:focus-visible,
+[data-theme='dark'] .site-header.over-hero.hero-dark .lang-toggle button:focus-visible,
+[data-theme='dark'] .site-header.over-hero.hero-dark .theme-toggle-btn:focus-visible {
+  outline-color: color-mix(in oklab, #fbf8f0 72%, transparent);
+}
+
+/* Scrolled header is blur/cream/paper + dark tokens — bar reads charcoal; black mark needs inverting */
+[data-theme='dark'] .site-header.scrolled.bg-blur .brand img,
+[data-theme='dark'] .site-header.scrolled.bg-cream .brand img,
+[data-theme='dark'] .site-header.scrolled.bg-paper .brand img {
+  filter: brightness(0) invert(1);
+}
+
+/* `bg-ink` header uses `--ft-ink` as bar fill — remap for dark tokens */
+[data-theme='dark'] .site-header.scrolled.bg-ink {
+  background: #100e0c;
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .brand-name,
+[data-theme='dark'] .site-header.scrolled.bg-ink .brand-tag,
+[data-theme='dark'] .site-header.scrolled.bg-ink .nav-link {
+  color: #f4efe8;
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .brand-tag {
+  color: color-mix(in oklab, #f4efe8 72%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .nav-link.active {
+  color: #f4efe8;
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .brand img {
+  filter: brightness(0) invert(1);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .lang-toggle {
+  --lang-rule: color-mix(in oklab, #f4efe8 26%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .lang-toggle button {
+  color: color-mix(in oklab, #f4efe8 52%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .lang-toggle button.active {
+  color: #f4efe8;
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .lang-toggle button:hover:not(.active) {
+  color: color-mix(in oklab, #f4efe8 72%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .theme-toggle-btn {
+  border-color: color-mix(in oklab, #f4efe8 26%, transparent);
+  color: color-mix(in oklab, #f4efe8 58%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled.bg-ink .theme-toggle-btn:hover {
+  color: #f4efe8;
+  border-color: color-mix(in oklab, #f4efe8 40%, transparent);
+  background: color-mix(in oklab, #f4efe8 10%, transparent);
+}

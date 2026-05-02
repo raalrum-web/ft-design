@@ -4,7 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="FT Design — interior design consultation services in Doha." />
-    <title>FT Design — Consultation</title>
+    <meta name="theme-color" content="#ECE4D2" />
+    <title>FT Design — Consultations</title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('ft-theme');
+          if (t === 'dark' || t === 'light') {
+            document.documentElement.dataset.theme = t;
+            var m = document.querySelector('meta[name="theme-color"]');
+            if (m) m.setAttribute('content', t === 'dark' ? '#141210' : '#ECE4D2');
+            return;
+          }
+        } catch (e) {}
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.dataset.theme = 'dark';
+          var m2 = document.querySelector('meta[name="theme-color"]');
+          if (m2) m2.setAttribute('content', '#141210');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

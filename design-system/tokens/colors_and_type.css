@@ -125,6 +125,57 @@
   --t-slow: 420ms;
 }
 
+/* Warm charcoal dark UI — toggled via `<html data-theme="dark">` from the app */
+[data-theme='dark'] {
+  /* Section bg stays deep; cards (`--ft-paper`) lift noticeably for hierarchy */
+  --ft-cream: #12100e;
+  --ft-cream-soft: #181614;
+  --ft-cream-deep: #1f1c18;
+  --ft-paper: #2c2824;
+  --ft-ink: #f3eee6;
+  --ft-ink-2: #cfc6ba;
+  --ft-ink-3: #9c948a;
+  --ft-ink-4: #726c64;
+  --ft-sage: #56695e;
+  /* Rich velvet emerald — deeper & cooler than light-theme olive, still lush on charcoal */
+  --ft-forest: #3d6b4e;
+  --ft-forest-deep: #2f5541;
+  --ft-forest-muted: #5c9173;
+  --ft-success: var(--ft-forest);
+  /* Dark-only: very light touch — base is `forest`; centre barely lifts toward muted */
+  --gradient-forest-velvet: linear-gradient(
+    168deg,
+    var(--ft-forest) 0%,
+    color-mix(in oklab, var(--ft-forest-muted) 9%, var(--ft-forest)) 50%,
+    var(--ft-forest) 100%
+  );
+  --gradient-forest-velvet-hover: linear-gradient(
+    168deg,
+    color-mix(in oklab, var(--ft-forest) 94%, var(--ft-forest-deep)) 0%,
+    color-mix(in oklab, var(--ft-forest-muted) 5%, var(--ft-forest)) 50%,
+    color-mix(in oklab, var(--ft-forest) 94%, var(--ft-forest-deep)) 100%
+  );
+  --bg: var(--ft-cream);
+  --bg-soft: var(--ft-cream-soft);
+  --bg-card: var(--ft-paper);
+  --fg-1: var(--ft-ink);
+  --fg-2: var(--ft-ink-2);
+  --fg-3: var(--ft-ink-3);
+  --fg-4: var(--ft-ink-4);
+  --line: color-mix(in oklab, #fff 14%, transparent);
+  --line-soft: color-mix(in oklab, #fff 8%, transparent);
+  --shadow-1:
+    0 1px 3px rgba(0, 0, 0, 0.42),
+    0 1px 2px rgba(0, 0, 0, 0.32);
+  --shadow-2:
+    0 8px 26px rgba(0, 0, 0, 0.42),
+    0 2px 8px rgba(0, 0, 0, 0.32);
+  --shadow-3:
+    0 18px 52px rgba(0, 0, 0, 0.52),
+    0 4px 14px rgba(0, 0, 0, 0.38);
+  --shadow-inset: inset 0 0 0 1px var(--line);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Semantic typographic styles. Use the classes; don't restyle headings.
    ────────────────────────────────────────────────────────────────────────── */

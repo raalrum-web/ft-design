@@ -17,7 +17,7 @@ export function ServicesScreen({ lang, onBook }) {
             </p>
           </div>
 
-          <div style={{ background: 'var(--ft-paper)', padding: '40px 48px', borderRadius: 8, boxShadow: 'var(--shadow-1)' }}>
+          <div className="surface-card" style={{ padding: '40px 48px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {items.map((it, i) => (
                 <div key={i} className="check-row">

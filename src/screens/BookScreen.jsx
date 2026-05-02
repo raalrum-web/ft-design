@@ -20,7 +20,7 @@ export function BookScreen({ lang, initialTier, onSubmit }) {
             </p>
           </div>
 
-          <div style={{ background: 'var(--ft-paper)', padding: '44px 48px', borderRadius: 10, boxShadow: 'var(--shadow-2)' }}>
+          <div className="surface-card surface-card--raised" style={{ padding: '44px 48px' }}>
             <form className="form" onSubmit={(e) => { e.preventDefault(); onSubmit({ tier }); }}>
               <div className="field">
                 <label className="field-label">{lang === 'en' ? 'Consultation tier' : 'نوع الاستشارة'}</label>

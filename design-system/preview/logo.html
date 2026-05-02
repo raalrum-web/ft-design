@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Logo</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 0; gap: 0; flex-direction: row; }
+  .panel { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .panel.cream { background: var(--ft-cream); }
+  .panel.paper { background: var(--ft-paper); }
+  .panel.ink   { background: var(--ft-ink); }
+  .panel img { max-width: 100%; max-height: 160px; object-fit: contain; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="panel cream"><img src="../assets/logo-ft-green.svg" alt="FT logo"></div>
+  <div class="panel paper"><img src="../assets/logo-ft-black.svg" alt="FT logo black"></div>
+  <div class="panel ink"><img src="../assets/logo-ft-green.svg" alt="FT logo on dark"></div>
+</div>
+</body>
+</html>

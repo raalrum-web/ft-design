@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Badges &amp; tags</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 28px; gap: 14px; justify-content: center; align-items: center; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .badge {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .b-forest { background: var(--ft-forest); color: #FBF8F0; }
+  .b-sage   { background: var(--ft-sage); color: var(--ft-forest-deep); }
+  .b-cream  { background: var(--ft-cream-deep); color: var(--ft-ink); }
+  .b-outline { border: 1px solid var(--ft-ink); color: var(--ft-ink); }
+  .num {
+    width: 24px; height: 24px; border-radius: 999px;
+    background: #FBF8F0; color: var(--ft-forest-deep);
+    font-family: var(--font-display); font-weight: 600; font-size: 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .tier {
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    color: #FBF8F0;
+    background: var(--ft-forest);
+    padding: 8px 18px 8px 8px; border-radius: 4px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <span class="badge b-forest">In-person</span>
+    <span class="badge b-sage">Remote</span>
+    <span class="badge b-cream">Doha only</span>
+    <span class="badge b-outline">Worldwide</span>
+  </div>
+  <div class="row">
+    <span class="tier"><span class="num">1</span>In-person · 45 min</span>
+    <span class="tier"><span class="num">2</span>Remote · 60 min</span>
+  </div>
+</div>
+</body>
+</html>

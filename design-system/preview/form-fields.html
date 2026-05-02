@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form fields</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 26px; gap: 14px; justify-content: center; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .label { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-3); }
+  .input {
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 12px 14px;
+    background: var(--ft-paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ft-ink);
+    outline: none;
+    transition: border-color 200ms;
+  }
+  .input:focus { border-color: var(--ft-forest); box-shadow: 0 0 0 3px rgba(79,107,63,.15); }
+  .input::placeholder { color: var(--fg-4); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="field">
+      <label class="label">Full name</label>
+      <input class="input" placeholder="Jane Al-Thani">
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <input class="input" placeholder="you@example.com">
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Tell us about the space</label>
+    <input class="input" value="Renovating a 4-bedroom villa in Al Waab" style="font-style:italic;">
+  </div>
+</div>
+</body>
+</html>

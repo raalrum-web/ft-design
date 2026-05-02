@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Type scale</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { gap: 6px; padding: 20px 28px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 4px 0; vertical-align: baseline; font-family: var(--font-body); }
+  td.size { width: 64px; font-size: 11px; color: var(--fg-3); letter-spacing: 0.06em; text-transform: uppercase; }
+  td.token { width: 96px; font-family: var(--font-mono, monospace); font-size: 11px; color: var(--fg-3); }
+  td.sample { color: var(--ft-ink); font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; }
+</style>
+</head>
+<body>
+<div class="card">
+  <table>
+    <tr><td class="size">88</td><td class="token">--fs-5xl</td><td class="sample" style="font-size:30px">Display</td></tr>
+    <tr><td class="size">64</td><td class="token">--fs-4xl</td><td class="sample" style="font-size:26px">Heading 1</td></tr>
+    <tr><td class="size">48</td><td class="token">--fs-3xl</td><td class="sample" style="font-size:22px">Heading 2</td></tr>
+    <tr><td class="size">36</td><td class="token">--fs-2xl</td><td class="sample" style="font-size:19px">Heading 3</td></tr>
+    <tr><td class="size">22</td><td class="token">--fs-xl</td><td class="sample" style="font-size:17px">Heading 4</td></tr>
+    <tr><td class="size">16</td><td class="token">--fs-base</td><td class="sample" style="font-family:var(--font-body); font-weight:400; font-size:15px">Body — sentence at base size.</td></tr>
+    <tr><td class="size">12</td><td class="token">--fs-xs</td><td class="sample" style="font-family:var(--font-body); font-weight:500; font-size:11px; letter-spacing:0.18em; text-transform:uppercase">Eyebrow Caps</td></tr>
+  </table>
+</div>
+</body>
+</html>

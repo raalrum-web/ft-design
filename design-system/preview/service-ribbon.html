@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Service ribbon</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 22px; justify-content: center; align-items: center; gap: 14px; }
+  .ribbon {
+    width: 100%;
+    max-width: 540px;
+    background: var(--ft-forest);
+    color: #FBF8F0;
+    border-radius: 4px;
+    padding: 14px 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-body); font-size: 15px;
+  }
+  .ribbon-title {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--font-display); font-weight: 500; font-size: 22px;
+  }
+  .num {
+    width: 26px; height: 26px; border-radius: 999px;
+    background: #FBF8F0; color: var(--ft-forest-deep);
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .stats { display: flex; align-items: center; gap: 14px; font-size: 14px; opacity: .92; }
+  .stats svg { width: 14px; height: 14px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="ribbon">
+    <div class="ribbon-title"><span class="num">1</span>In-person</div>
+    <div class="stats"><span>⏱ 45 min</span><span>· QAR 5,000</span></div>
+  </div>
+  <div class="ribbon">
+    <div class="ribbon-title"><span class="num">2</span>Remote</div>
+    <div class="stats"><span>⏱ 60 min</span><span>· QAR 3,000</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   FT Design — Foundations
+   Colors and type tokens. Import this once at the top of any page.
+
+   Fonts loaded from Google Fonts as nearest matches to the brand wordmark
+   and supplementary copy. See README → "Font substitutions" — flag any
+   replacements you want before going to print.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ── Brand colors ─────────────────────────────────────────────── */
+  /* Surfaces — warm sand / cream paper tones taken from the sample sheets */
+  --ft-cream:        #ECE4D2;   /* page background, primary surface     */
+  --ft-cream-soft:   #F4EEDF;   /* lighter cream for nested cards       */
+  --ft-cream-deep:   #E2D8C2;   /* warmer cream for borders / divs      */
+  --ft-paper:        #FBF8F0;   /* near-white card fill                 */
+
+  /* Primary — deep forest green from the service-tier ribbons          */
+  --ft-forest:       #4F6B3F;   /* primary brand green                  */
+  --ft-forest-deep:  #3D5530;   /* hover / pressed                      */
+  --ft-forest-muted: #6B8156;   /* lighter, for badges & lines          */
+  --ft-sage:         #B8C2A8;   /* tints, hairlines, disabled bg        */
+
+  /* Ink — near-black with a warm undertone (matches dark steel doors)  */
+  --ft-ink:          #1F1B17;   /* body copy, headlines                 */
+  --ft-ink-2:        #3A332B;   /* secondary copy                       */
+  --ft-ink-3:        #6B6259;   /* tertiary, captions                   */
+  --ft-ink-4:        #948B7E;   /* placeholder, hints                   */
+
+  /* Wood / brass accents pulled from interiors                         */
+  --ft-walnut:       #6B4A2B;
+  --ft-walnut-deep:  #4A3220;
+  --ft-brass:        #B88B4A;
+  --ft-brass-light:  #D9B27A;
+
+  /* Semantic                                                           */
+  --ft-success:      #4F6B3F;
+  --ft-error:        #8C3A2E;   /* warm, brick-red — not stoplight red  */
+  --ft-warn:         #B88B4A;   /* same brass tone                      */
+
+  /* Neutral surface aliases used through the kits                      */
+  --bg:              var(--ft-cream);
+  --bg-soft:         var(--ft-cream-soft);
+  --bg-card:         var(--ft-paper);
+  --fg-1:            var(--ft-ink);
+  --fg-2:            var(--ft-ink-2);
+  --fg-3:            var(--ft-ink-3);
+  --fg-4:            var(--ft-ink-4);
+  --accent:          var(--ft-forest);
+  --accent-deep:     var(--ft-forest-deep);
+  --line:            color-mix(in oklab, var(--ft-ink) 14%, transparent);
+  --line-soft:       color-mix(in oklab, var(--ft-ink) 7%, transparent);
+
+  /* ── Type families ────────────────────────────────────────────── */
+  --font-display:    'Cormorant Garamond', 'Cormorant', 'EB Garamond',
+                     'Times New Roman', serif;
+  --font-body:       'Inter', 'Helvetica Neue', Arial, sans-serif;
+  /* English long-form / prose — pairs with display serif; UI stays Inter */
+  --font-secondary-en: 'Literata', Georgia, 'Times New Roman', serif;
+  /* Arabic UI / body — neutral sans */
+  --font-arabic:     'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+  /* Arabic display — Tajawal for headlines + RTL nav */
+  --font-arabic-display: 'Tajawal', 'IBM Plex Sans Arabic', sans-serif;
+  --font-mono:       'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* ── Type scale (rem-based, 16px root) ────────────────────────── */
+  --fs-xs:    0.75rem;    /*  12 */
+  --fs-sm:    0.875rem;   /*  14 */
+  --fs-base:  1rem;       /*  16 */
+  --fs-md:    1.125rem;   /*  18 */
+  --fs-lg:    1.375rem;   /*  22 */
+  --fs-xl:    1.75rem;    /*  28 */
+  --fs-2xl:   2.25rem;    /*  36 */
+  --fs-3xl:   3rem;       /*  48 */
+  --fs-4xl:   4rem;       /*  64 */
+  --fs-5xl:   5.5rem;     /*  88 — hero display only */
+
+  --lh-tight:  1.1;
+  --lh-snug:   1.25;
+  --lh-normal: 1.5;
+  --lh-loose:  1.7;
+
+  --tr-tight:  -0.02em;   /* tight tracking for display serif */
+  --tr-normal: 0;
+  --tr-wide:   0.08em;    /* small caps / eyebrows            */
+  --tr-xwide:  0.18em;    /* the "DESIGN CONSULTATION SERVICES" rule */
+
+  /* ── Spacing & radii ──────────────────────────────────────────── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  --r-xs:  2px;
+  --r-sm:  4px;
+  --r-md:  6px;
+  --r-lg:  10px;
+  --r-xl:  16px;
+  --r-pill: 999px;
+
+  /* ── Elevation ────────────────────────────────────────────────── */
+  /* Restrained, warm-tinted shadows — not the cool drop-shadows of
+     a SaaS dashboard. */
+  --shadow-1: 0 1px 2px rgba(31, 27, 23, 0.06),
+              0 1px 1px rgba(31, 27, 23, 0.04);
+  --shadow-2: 0 4px 12px rgba(31, 27, 23, 0.08),
+              0 1px 2px rgba(31, 27, 23, 0.04);
+  --shadow-3: 0 12px 32px rgba(31, 27, 23, 0.10),
+              0 2px 6px rgba(31, 27, 23, 0.04);
+  --shadow-inset: inset 0 0 0 1px var(--line);
+
+  /* Motion — slow, elegant. Furniture moves; UI shouldn't bounce. */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 140ms;
+  --t-base: 240ms;
+  --t-slow: 420ms;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Semantic typographic styles. Use the classes; don't restyle headings.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.ft-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-5xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  color: var(--fg-1);
+}
+
+.ft-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  color: var(--fg-1);
+}
+
+.ft-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-tight);
+  color: var(--fg-1);
+}
+
+.ft-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.ft-h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+/* The horizontal rule under "FT Design" on the brand sheet:
+   tracked-out small caps, sits on top of a horizontal line. */
+.ft-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tr-xwide);
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.ft-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: var(--lh-loose);
+  color: var(--fg-2);
+}
+
+.ft-body-lg {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-md);
+  line-height: var(--lh-loose);
+  color: var(--fg-2);
+}
+
+.ft-caption {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--fg-3);
+}
+
+.ft-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* Arabic styles — NEVER use Latin display serif for Arabic.
+   Headlines: --font-arabic-display; body/UI: --font-arabic. Right-aligned by default. */
+.ft-ar-h2 {
+  font-family: var(--font-arabic-display);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  line-height: 1.6;
+  color: var(--fg-1);
+  direction: rtl;
+  text-align: right;
+}
+.ft-ar-h3 {
+  font-family: var(--font-arabic);
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  line-height: 1.6;
+  color: var(--fg-1);
+  direction: rtl;
+  text-align: right;
+}
+.ft-ar-body {
+  font-family: var(--font-arabic);
+  font-weight: 400;
+  font-size: var(--fs-md);
+  line-height: 1.9;
+  color: var(--fg-2);
+  direction: rtl;
+  text-align: right;
+}
+
+/* Default reset – plain elements look right out of the box. */
+html, body {
+  background: var(--bg);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 { font: 500 var(--fs-4xl)/var(--lh-tight) var(--font-display);
+     letter-spacing: var(--tr-tight); margin: 0; }
+h2 { font: 500 var(--fs-3xl)/var(--lh-snug) var(--font-display);
+     letter-spacing: var(--tr-tight); margin: 0; }
+h3 { font: 500 var(--fs-2xl)/var(--lh-snug) var(--font-display);
+     margin: 0; }
+h4 { font: 600 var(--fs-xl)/var(--lh-snug) var(--font-display);
+     margin: 0; }
+p  { margin: 0 0 1em 0; color: var(--fg-2); line-height: var(--lh-loose); }
+a  { color: var(--ft-forest); text-decoration: none;
+     border-bottom: 1px solid color-mix(in oklab, var(--ft-forest) 35%, transparent);
+     transition: color var(--t-fast) var(--ease-out),
+                 border-color var(--t-fast) var(--ease-out); }
+a:hover { color: var(--ft-forest-deep);
+          border-bottom-color: var(--ft-forest-deep); }
+hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-6) 0; }

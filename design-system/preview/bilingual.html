@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bilingual pairing</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 24px 28px; flex-direction: row; gap: 28px; align-items: center; }
+  .col { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .eyebrow { font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ft-forest); }
+  .en-h { font-family: var(--font-display); font-weight: 500; font-size: 26px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ft-ink); }
+  .en-b { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--fg-2); }
+  .ar { direction: rtl; text-align: right; font-family: var(--font-arabic); }
+  .ar-h { font-weight: 700; font-size: 26px; line-height: 1.4; color: var(--ft-ink); }
+  .ar-b { font-weight: 400; font-size: 15px; line-height: 1.85; color: var(--fg-2); }
+  .divider { width: 1px; align-self: stretch; background: var(--line); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="col">
+    <div class="eyebrow">Consultation</div>
+    <div class="en-h">Considered, in person.</div>
+    <div class="en-b">Forty-five minutes on-site, walking through your home together.</div>
+  </div>
+  <div class="divider"></div>
+  <div class="col ar">
+    <div class="ar-h">الاستشارة المباشرة</div>
+    <div class="ar-b">خمسٌ وأربعون دقيقةً في موقع المشروع، نطوف بكم أرجاء المسكن.</div>
+  </div>
+</div>
+</body>
+</html>

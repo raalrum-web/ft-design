@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Buttons</title>
+<link rel="stylesheet" href="_card.css">
+<style>
+  .card { padding: 28px; gap: 14px; justify-content: center; align-items: center; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    padding: 12px 22px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 240ms cubic-bezier(.22,.61,.36,1);
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--ft-forest); color: #FBF8F0; }
+  .btn-primary:hover { background: var(--ft-forest-deep); }
+  .btn-secondary { background: transparent; color: var(--ft-ink); border-color: var(--ft-ink); }
+  .btn-secondary:hover { background: var(--ft-ink); color: var(--ft-paper); }
+  .btn-ghost { background: transparent; color: var(--ft-ink); }
+  .btn-ghost:hover { background: rgba(31,27,23,.06); }
+  .btn-link {
+    font-family: var(--font-body); font-weight: 500; font-size: 14px;
+    color: var(--ft-forest); border-bottom: 1px solid var(--ft-forest);
+    padding: 2px 0;
+  }
+  .arr { display:inline-block; transform: translateY(1px); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <a class="btn btn-primary" href="#">Book consultation <span class="arr">→</span></a>
+    <a class="btn btn-secondary" href="#">Learn more</a>
+    <a class="btn btn-ghost" href="#">Cancel</a>
+  </div>
+  <div class="row">
+    <a class="btn-link" href="#">View all services →</a>
+  </div>
+</div>
+</body>
+</html>

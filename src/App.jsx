@@ -18,15 +18,22 @@ function readStoredTheme() {
   } catch {
     /* ignore */
   }
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
+  return 'dark';
+}
+
+function readStoredLang() {
+  try {
+    const v = localStorage.getItem('ft-lang');
+    if (v === 'ar' || v === 'en') return v;
+  } catch {
+    /* ignore */
   }
-  return 'light';
+  return 'ar';
 }
 
 export default function App() {
   const [screen, setScreen] = useState('home');
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState(readStoredLang);
   const [tier, setTier] = useState(1);
   const [theme, setTheme] = useState(readStoredTheme);
 
@@ -37,6 +44,11 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    try {
+      localStorage.setItem('ft-lang', lang);
+    } catch {
+      /* ignore */
+    }
   }, [lang]);
 
   useEffect(() => {
@@ -48,7 +60,7 @@ export default function App() {
     }
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute('content', theme === 'dark' ? '#141210' : '#ECE4D2');
+      meta.setAttribute('content', theme === 'dark' ? '#0a0908' : '#ECE4D2');
     }
   }, [theme]);
 

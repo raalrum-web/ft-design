@@ -410,7 +410,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-link:focus-visible::after { opacity: 0; }
 
-/* Language: framed pair; inner rule is short segment (not full cap height) */
+/* Language: framed pair — outer height matches `.theme-toggle-btn` */
 .lang-toggle {
   --lang-rule: color-mix(in oklab, var(--ft-ink) 14%, transparent);
   direction: ltr;
@@ -418,7 +418,9 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 0;
   margin: 0;
-  padding: 4px 12px;
+  height: var(--nav-trailing-control-height, 38px);
+  padding: 0 12px;
+  box-sizing: border-box;
   border: 1px solid var(--lang-rule);
   border-radius: 0;
   background: transparent;
@@ -427,7 +429,7 @@ img { max-width: 100%; display: block; }
 .lang-toggle button {
   min-width: unset;
   margin: 0;
-  padding: 6px 0;
+  padding: 0;
   border: none;
   border-radius: 0;
   background: transparent;
@@ -438,6 +440,9 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.12em;
   color: var(--ft-ink-3);
   transition: color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
 }
 .lang-toggle button:first-child {
   position: relative;
@@ -450,7 +455,7 @@ img { max-width: 100%; display: block; }
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 10px;
+  height: 14px;
   background: var(--lang-rule);
 }
 .lang-toggle button + button {
@@ -472,13 +477,14 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: clamp(12px, 2.2vw, 20px);
   flex-shrink: 0;
+  --nav-trailing-control-height: 38px;
 }
 .theme-toggle-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: var(--nav-trailing-control-height);
+  height: var(--nav-trailing-control-height);
   margin: 0;
   padding: 0;
   border: 1px solid color-mix(in oklab, var(--ft-ink) 14%, transparent);
@@ -806,7 +812,7 @@ img { max-width: 100%; display: block; }
 .section { padding: 96px 0; }
 .section-tight { padding: 64px 0; }
 .section-cream { background: var(--ft-cream); }
-.section-paper { background: var(--ft-paper); }
+.section-paper { background: var(--ft-section-paper); }
 
 .section-head {
   text-align: center;
@@ -1388,7 +1394,7 @@ main > .section.home-section-tiers .home-tiers-grid {
 }
 .home-gallery-row {
   --gallery-max-h: min(48vh, 520px);
-  --gallery-frame: 4px solid #fff;
+  --gallery-frame: 2px solid #fff;
   --gallery-frame-radius: var(--r-sm);
   --gallery-frame-edge: 0 0 0 1px color-mix(in oklab, var(--ft-ink) 13%, transparent);
   --gallery-frame-lift-main:
@@ -1880,7 +1886,7 @@ main > .section.home-section-tiers .home-tiers-grid {
 }
 
 [data-theme='dark'] .site-footer {
-  background: #0e0c0a;
+  background: var(--ft-cream);
   color: color-mix(in oklab, #e8e2d9 74%, transparent);
 }
 [data-theme='dark'] .site-footer h4 {
@@ -1899,12 +1905,12 @@ main > .section.home-section-tiers .home-tiers-grid {
 }
 
 /*
- * Dark gallery frames: opaque stroke reads clean; warm paper-beige is gentler than pure white.
+ * Dark gallery: hairline beige stroke + soft halo (no second ring — reads thinner).
  */
 [data-theme='dark'] .home-gallery-row {
-  --gallery-frame: 2px solid #e9e4da;
-  --gallery-frame-edge: 0 0 0 1px #e9e4da;
-  --gallery-frame-lift-main: 0 0 18px rgba(233, 228, 218, 0.18);
+  --gallery-frame: 1px solid rgba(233, 228, 218, 0.52);
+  --gallery-frame-edge: 0 0 0 0 transparent;
+  --gallery-frame-lift-main: 0 0 10px rgba(233, 228, 218, 0.09);
 }
 
 [data-theme='dark'] .field-input:focus,
@@ -1926,12 +1932,13 @@ main > .section.home-section-tiers .home-tiers-grid {
   border-color: color-mix(in oklab, #fff 48%, transparent);
 }
 
-/* Dark UI + hero photo: light nav on hero for contrast */
+/* Dark UI + hero photo: paper-white chrome (matches intent of light hero-light) */
 [data-theme='dark'] .site-header.over-hero.hero-dark .brand-name,
 [data-theme='dark'] .site-header.over-hero.hero-dark .brand-tag,
 [data-theme='dark'] .site-header.over-hero.hero-dark .nav-link,
 [data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .nav-link {
   color: #fbf8f0;
+  text-shadow: none;
 }
 [data-theme='dark'] .site-header.over-hero.hero-dark .brand-tag,
 [data-theme='dark'][dir='rtl'] .site-header.over-hero.hero-dark .brand-tag {
@@ -1981,11 +1988,63 @@ main > .section.home-section-tiers .home-tiers-grid {
   outline-color: color-mix(in oklab, #fbf8f0 72%, transparent);
 }
 
-/* Scrolled header is blur/cream/paper + dark tokens — bar reads charcoal; black mark needs inverting */
-[data-theme='dark'] .site-header.scrolled.bg-blur .brand img,
-[data-theme='dark'] .site-header.scrolled.bg-cream .brand img,
-[data-theme='dark'] .site-header.scrolled.bg-paper .brand img {
+/* After scroll: same paper-white chrome as over-hero (no switch to default ink nav) */
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand-name,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand-tag,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link {
+  color: #fbf8f0;
+  text-shadow: none;
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand-tag,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand-tag {
+  color: color-mix(in oklab, #fbf8f0 76%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand img,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand img {
   filter: brightness(0) invert(1);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link:hover,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link.active,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link:hover,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link.active {
+  color: #fbf8f0;
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle {
+  --lang-rule: color-mix(in oklab, #fbf8f0 28%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button {
+  color: color-mix(in oklab, #fbf8f0 54%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button.active,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button.active {
+  color: #fbf8f0;
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button:hover:not(.active),
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button:hover:not(.active) {
+  color: color-mix(in oklab, #fbf8f0 74%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .theme-toggle-btn,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .theme-toggle-btn {
+  border-color: color-mix(in oklab, #fbf8f0 26%, transparent);
+  color: color-mix(in oklab, #fbf8f0 62%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .theme-toggle-btn:hover,
+[data-theme='dark'][dir='rtl'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .theme-toggle-btn:hover {
+  color: #fbf8f0;
+  border-color: color-mix(in oklab, #fbf8f0 42%, transparent);
+  background: color-mix(in oklab, #fbf8f0 10%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link:focus-visible,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .brand:focus-visible,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .lang-toggle button:focus-visible,
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .theme-toggle-btn:focus-visible {
+  outline-color: color-mix(in oklab, #fbf8f0 72%, transparent);
+}
+[data-theme='dark'] .site-header.scrolled:is(.bg-blur, .bg-cream, .bg-paper) .nav-link:focus-visible::after {
+  opacity: 0;
 }
 
 /* `bg-ink` header uses `--ft-ink` as bar fill — remap for dark tokens */

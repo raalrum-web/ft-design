@@ -15,7 +15,9 @@
   --ft-cream:        #ECE4D2;   /* page background, primary surface     */
   --ft-cream-soft:   #F4EEDF;   /* lighter cream for nested cards       */
   --ft-cream-deep:   #E2D8C2;   /* warmer cream for borders / divs      */
-  --ft-paper:        #FBF8F0;   /* near-white card fill                 */
+  /* Cards / fields: bright warm-white; section strip a clean off-white (cards + border/shadow still lift). */
+  --ft-paper:         #FEFDFB;
+  --ft-section-paper: #FBF8F0;
 
   /* Primary — deep forest green from the service-tier ribbons          */
   --ft-forest:       #4F6B3F;   /* primary brand green                  */
@@ -127,11 +129,16 @@
 
 /* Warm charcoal dark UI — toggled via `<html data-theme="dark">` from the app */
 [data-theme='dark'] {
-  /* Section bg stays deep; cards (`--ft-paper`) lift noticeably for hierarchy */
-  --ft-cream: #12100e;
-  --ft-cream-soft: #181614;
-  --ft-cream-deep: #1f1c18;
-  --ft-paper: #2c2824;
+  /*
+   * Floors deepest (`--ft-cream*`), dividers `--ft-cream-deep`, tier strip `--ft-section-paper`,
+   * cards `--ft-paper`: each step a little lighter so charcoal panels read lifted.
+   */
+  --ft-cream: #0a0908;
+  --ft-cream-soft: #100e0c;
+  --ft-cream-deep: #151311;
+  --ft-paper: #1e1b18;
+  /* Tier / section-paper band: slightly above cream-deep, still below cards */
+  --ft-section-paper: #1b1916;
   --ft-ink: #f3eee6;
   --ft-ink-2: #cfc6ba;
   --ft-ink-3: #9c948a;
